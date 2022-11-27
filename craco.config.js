@@ -1,7 +1,12 @@
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const SimpleProgressWebpackPlugin = require("simple-progress-webpack-plugin");
+const CracoLessPlugin = require("craco-less");
 const webpack = require("webpack");
 const path = require("path");
 const addPath = (dir) => path.join(__dirname, dir);
+// 是否是生产环境
+const isProduction = process.env.NODE_ENV !== "production";
 module.exports = {
   webpack: {
     // 别名
@@ -9,6 +14,8 @@ module.exports = {
       "@": addPath("src"),
     },
     plugins: [
+      // 打包进度
+      new SimpleProgressWebpackPlugin(),
       // 打压缩包
       new CompressionWebpackPlugin({
         filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
@@ -17,6 +24,38 @@ module.exports = {
         threshold: 10240, // 只处理比这个值大的资源。按字节计算
         minRatio: 0.8, // 只有压缩率比这个值小的资源才会被处理
       }),
+      // 压缩ES6
+      new UglifyJsPlugin({
+        parallel: true,
+        uglifyOptions: {
+          // 在UglifyJs删除没有用到的代码时不输出警告
+          warnings: false,
+          // debug false
+          output: {
+            comments: false,
+            beautify: false,
+            // debug true
+          },
+          compress: {
+            // 删除所有的 `console` 语句
+            // 还可以兼容ie浏览器
+            drop_console: isProduction ? false : true,
+            // 内嵌定义了但是只用到一次的变量
+            collapse_vars: true,
+            // 提取出出现多次但是没有定义成变量去引用的静态值
+            reduce_vars: true,
+          },
+        },
+      }),
+      // less
+      {
+        plugin: CracoLessPlugin,
+        options: {
+          cssLoaderOptions: {
+            modules: { localIdentName: "[local]_[hash:base64:5]" },
+          },
+        },
+      },
     ],
   },
   // 代理
