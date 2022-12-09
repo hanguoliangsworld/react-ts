@@ -13,5 +13,6 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "react/self-closing-comp": ["error"], // 自动闭合标签
   },
 };
