@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { ConfigProvider } from "antd";
+import AppRoute from "@/router";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
@@ -9,7 +10,14 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "blue",
+        },
+      }}>
+      <AppRoute />
+    </ConfigProvider>
   </React.StrictMode>,
 );
 
