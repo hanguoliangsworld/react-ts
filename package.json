@@ -15,6 +15,7 @@
     "compression-webpack-plugin": "^10.0.0",
     "concurrently": "^7.6.0",
     "craco-less": "^2.0.0",
+    "echarts": "^5.4.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.0",

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import "./index.less";
 import Avatar from "@/components/avatar";
-import { CONFIG } from "@/config";
 import { Layout, Badge, Popover, Empty } from "antd";
 import { Link } from "react-router-dom";
 import { HomeMainState } from "@/config/interface";
@@ -11,8 +10,6 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   BellFilled,
-  BugFilled,
-  GithubOutlined,
   FullscreenExitOutlined,
   FullscreenOutlined,
 } from "@ant-design/icons";
