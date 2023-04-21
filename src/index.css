@@ -30,3 +30,17 @@ pre {
 em {
   font-style: normal;
 }
+
+@font-face {
+  font-family: "iconfont";
+  src: url("@/assets/iconfont/iconfont.woff2?t=1681979381054") format("woff2"),
+    url("@/assets/iconfont/iconfont.woff?t=1681979381054") format("woff"),
+    url("@/assets/iconfont/iconfont.ttf?t=1681979381054") format("truetype");
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

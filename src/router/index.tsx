@@ -4,7 +4,7 @@ import { BrowserRouter, useRoutes } from "react-router-dom";
 import MainEntry from "@/components/layout";
 import { RouterProps } from "@/config/interface";
 
-function App() {
+const App = () => {
   const routers: RouterProps[] = [];
   const sliderRoters: RouterProps[] = [];
   MainRoutes.forEach((item) => {
@@ -33,6 +33,6 @@ function App() {
       <MRoutes />
     </BrowserRouter>
   );
-}
+};
 
 export default App;

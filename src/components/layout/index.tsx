@@ -20,7 +20,6 @@ const HomeMainPage: React.FC = function () {
     setCollapsed(!collapsed);
     localStorage.setItem(SIDEBAR_COLLAPSED, Number(collapsed) + "");
   }
-
   return (
     <section className="home-main">
       <Layout>
