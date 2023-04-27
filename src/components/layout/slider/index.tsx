@@ -16,7 +16,7 @@ const Sidebar: React.FC<Props> = ({ collapsed }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedKeys, setSelectedKeys] = useState("");
-  const [openKeys, setOpenKeys] = useState<string[]>([]);
+  const [openKeys, setOpenKeys] = useState<string[]>([""]);
 
   function handleOpenChange(openKeys: any) {
     setOpenKeys(openKeys);
@@ -36,16 +36,27 @@ const Sidebar: React.FC<Props> = ({ collapsed }) => {
     const pathname = location.pathname;
     const fragment = pathname.split("/").slice(0, 3);
     const prefixPath = fragment.join("/");
-    if (fragment.length === 3) {
+    if (fragment.length > 0) {
       for (let i = 0; i < meunList.length; i++) {
         const menu = meunList[i];
+        if (menu.path === fragment[fragment.length - 1]) {
+          setSelectedKeys(menu.path);
+          setOpenKeys([menu.path]);
+          return;
+        }
+        if (menu.path === fragment[fragment.length - 2]) {
+          setOpenKeys([menu.path]);
+        }
         if (Array.isArray(menu.children)) {
           const findIdx = menu.children.findIndex(
-            (menu) => pathname === menu.path,
+            (menu) =>
+              fragment[fragment.length - 2] +
+                "/" +
+                fragment[fragment.length - 1] ===
+              menu.path,
           );
           if (findIdx !== -1) {
             setSelectedKeys(menu.children[findIdx].path);
-            setOpenKeys([menu.title || ""]);
             break;
           }
         }
@@ -60,7 +71,7 @@ const Sidebar: React.FC<Props> = ({ collapsed }) => {
   const items: MenuProps["items"] = useMemo(() => {
     return meunList.map((item) => {
       const data: any = {
-        key: item.path || item.title,
+        key: item.path,
         icon: item.icon,
         label: item.title,
       };

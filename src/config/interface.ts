@@ -5,7 +5,7 @@ export interface HomeMainState {
 }
 export interface RouterProps {
   path: string;
-  element: React.ReactNode | null;
+  element?: React.ReactNode | null;
   children?: RouterProps[];
   title?: string;
   icon?:any,

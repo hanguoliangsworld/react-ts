@@ -4,8 +4,10 @@ import PrivateRoute from "@/components/privateRoute";
 import Login from "@/pages/login";
 import NoMatch from "@/pages/noFind";
 import HomeIndex from "@/pages/home";
-import CreateLog from "@/pages/log/createLog";
-import LogDetail from "@/pages/log/logDetail";
+import Picture from "@/pages/performance/picture";
+import Virtuallist from "@/pages/performance/virtuallist";
+import Webworker from "@/pages/performance/webworker";
+import Webworker2 from "@/pages/performance/webworker2";
 
 const Base = lazy(() => import("@/pages/setting/base"));
 const InnerMessage = lazy(() => import("@/pages/setting/base"));
@@ -66,43 +68,61 @@ export const MainRoutes = [
     isMenu: true,
   },
   {
-    path: "",
-    element: (
-      <PrivateRoute
-        element={CreateLog}
-        meta={{
-          requiresAuth: true,
-        }}
-      />
-    ),
-    title: "日志管理",
+    path: "performance",
+    title: "性能优化",
     icon: <ClockCircleOutlined />,
     isMenu: true,
     children: [
       {
-        path: "log/create",
+        path: "performance/picture",
         element: (
           <PrivateRoute
-            element={CreateLog}
+            element={Picture}
             meta={{
               requiresAuth: true,
             }}
           />
         ),
-        title: "创建日志",
+        title: "图片加载",
         isMenu: true,
       },
       {
-        path: "log/detail",
+        path: "performance/virtuallist",
         element: (
           <PrivateRoute
-            element={LogDetail}
+            element={Virtuallist}
             meta={{
               requiresAuth: true,
             }}
           />
         ),
-        title: "查看日志",
+        title: "虚拟列表",
+        isMenu: true,
+      },
+      {
+        path: "performance/webworker",
+        element: (
+          <PrivateRoute
+            element={Webworker}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "Web Worker",
+        isMenu: true,
+      },
+      {
+        path: "performance/webworker2",
+        element: (
+          <PrivateRoute
+            element={Webworker2}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "Web Worker2",
         isMenu: true,
       },
     ],

@@ -82,13 +82,13 @@ module.exports = {
   ],
   // 代理
   devServer: {
+    port: 3001,
     proxy: {
       "/api": {
         target: "http://localhost:3001",
+        secure: false,
         changeOrigin: true,
-        pathRewrite: {
-          "^/api": "/api",
-        },
+        pathRewrite: { "^/api": "" },
       },
     },
   },

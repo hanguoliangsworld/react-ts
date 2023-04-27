@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 const workercode = () => {
   self.onmessage = function (e) {
-    console.log(44444);
+    console.log("——web worker线程执行开始——");
     const result = [...e.data];
     const arr: string[] = [];
     result.forEach((item: any, index: number) => {

@@ -6,7 +6,7 @@ const containerHeight = 600; // 容器高度
 const total = 1000; // 数据总条数
 const contentHeight = total * (itemHeight + 1); // 总内容高度
 const paddingCount = 5; // 误差
-const Log = () => {
+const Virtuallist = () => {
   const [scrollTop, setScrollTop] = useState(0); // 滚动位置
 
   // 继续需要渲染的 item 索引有哪些
@@ -19,6 +19,7 @@ const Log = () => {
   startIdx = Math.max(startIdx - paddingCount, 0); // 处理越界情况
   endIdx = Math.min(endIdx + paddingCount, total - 1);
 
+  console.log(startIdx, endIdx, 1111122);
   const innerBeforeHeight = useMemo(() => itemHeight * startIdx, [startIdx]);
 
   const items = [];
@@ -38,11 +39,11 @@ const Log = () => {
     );
   }
   const handleScroll = (e: any) => {
-    // setScrollTop(e.target.scrollTop);
+    setScrollTop(e.target.scrollTop);
     // 同步更新
-    flushSync(() => {
+    /* flushSync(() => {
       setScrollTop(e.target.scrollTop);
-    });
+    }); */
   };
 
   return (
@@ -53,11 +54,9 @@ const Log = () => {
         border: "1px solid red",
       }}
       onScroll={handleScroll}>
-      <div style={{ height: contentHeight + "px" }}>
-        <div style={{ height: innerBeforeHeight }} />
-        {items}
-      </div>
+      <div style={{ height: innerBeforeHeight }} />
+      {items}
     </div>
   );
 };
-export default Log;
+export default Virtuallist;
