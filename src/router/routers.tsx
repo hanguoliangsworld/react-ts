@@ -8,6 +8,7 @@ import Picture from "@/pages/performance/picture";
 import Virtuallist from "@/pages/performance/virtuallist";
 import Webworker from "@/pages/performance/webworker";
 import Webworker2 from "@/pages/performance/webworker2";
+import LazyImg from "@/pages/lazy/img/index";
 
 const Base = lazy(() => import("@/pages/setting/base"));
 const InnerMessage = lazy(() => import("@/pages/setting/base"));
@@ -123,6 +124,27 @@ export const MainRoutes = [
           />
         ),
         title: "Web Worker2",
+        isMenu: true,
+      },
+    ],
+  },
+  {
+    path: "lazy",
+    title: "懒加载",
+    icon: <ClockCircleOutlined />,
+    isMenu: true,
+    children: [
+      {
+        path: "lazy/img",
+        element: (
+          <PrivateRoute
+            element={LazyImg}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "图片懒加载",
         isMenu: true,
       },
     ],

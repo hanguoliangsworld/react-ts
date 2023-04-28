@@ -21,6 +21,7 @@
     "prettier": "^2.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-lazy-load-image-component": "^1.5.6",
     "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
     "simple-progress-webpack-plugin": "^2.0.0",
