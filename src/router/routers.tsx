@@ -9,11 +9,12 @@ import Virtuallist from "@/pages/performance/virtuallist";
 import Webworker from "@/pages/performance/webworker";
 import Webworker2 from "@/pages/performance/webworker2";
 import LazyImg from "@/pages/lazy/img/index";
+import Hooks from "@/pages/v18/hooks";
 
-const Base = lazy(() => import("@/pages/setting/base"));
+/* const Base = lazy(() => import("@/pages/setting/base"));
 const InnerMessage = lazy(() => import("@/pages/setting/base"));
 const Notification = lazy(() => import("@/pages/setting/base"));
-const Account = lazy(() => import("@/pages/setting/base"));
+const Account = lazy(() => import("@/pages/setting/base")); */
 
 const _Login = (
   <PrivateRoute
@@ -145,6 +146,27 @@ export const MainRoutes = [
           />
         ),
         title: "图片懒加载",
+        isMenu: true,
+      },
+    ],
+  },
+  {
+    path: "v18",
+    title: "React V18",
+    icon: <ClockCircleOutlined />,
+    isMenu: true,
+    children: [
+      {
+        path: "V18/hooks",
+        element: (
+          <PrivateRoute
+            element={Hooks}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "hooks",
         isMenu: true,
       },
     ],
