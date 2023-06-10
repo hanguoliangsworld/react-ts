@@ -10,6 +10,7 @@ import Webworker from "@/pages/performance/webworker";
 import Webworker2 from "@/pages/performance/webworker2";
 import LazyImg from "@/pages/lazy/img/index";
 import Hooks from "@/pages/v18/hooks";
+import Debounce from "@/pages/v18/debounce";
 
 /* const Base = lazy(() => import("@/pages/setting/base"));
 const InnerMessage = lazy(() => import("@/pages/setting/base"));
@@ -167,6 +168,19 @@ export const MainRoutes = [
           />
         ),
         title: "hooks",
+        isMenu: true,
+      },
+      {
+        path: "V18/debounce",
+        element: (
+          <PrivateRoute
+            element={Debounce}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "debounce",
         isMenu: true,
       },
     ],
