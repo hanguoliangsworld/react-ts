@@ -5,6 +5,7 @@ import { Layout, Badge, Popover, Empty } from "antd";
 import { Link } from "react-router-dom";
 import { HomeMainState } from "@/config/interface";
 import { fullscreen, exitFullscreen, logout } from "@/utils";
+import EventEmitter from "@/utils/eventEmitter";
 import {
   PoweroffOutlined,
   MenuUnfoldOutlined,
@@ -41,8 +42,12 @@ const HomeHeader: React.FC<Props> = function ({ collapsed, setCollapsed }) {
   const [messageList, setMessageList] = useState([]);
   const [unReadCount, setUnReadCount] = useState(10);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [authName, setAuthName] = useState("庄子");
 
   useEffect(() => {
+    EventEmitter.once("name", (val: string) => {
+      setAuthName(val);
+    });
     /* serviceGetInnerMessage({ pageSize: 5 }).then((res) => {
       let count = 0;
       const data = res.rows.map((item: any) => {
@@ -122,7 +127,7 @@ const HomeHeader: React.FC<Props> = function ({ collapsed, setCollapsed }) {
         <Popover placement="bottomRight" content={PopoverContent}>
           <li>
             <Avatar src="https://upload.jianshu.io/users/upload_avatars/18218755/f75880d5-fcec-4039-af0b-84c92b779542.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" />
-            <span className="username">庄子</span>
+            <span className="username">{authName}</span>
           </li>
         </Popover>
       </ul>

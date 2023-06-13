@@ -11,6 +11,8 @@ import Webworker2 from "@/pages/performance/webworker2";
 import LazyImg from "@/pages/lazy/img/index";
 import Hooks from "@/pages/v18/hooks";
 import Debounce from "@/pages/v18/debounce";
+import Concurrency from "@/pages/handwriting/concurrency";
+import Subscribe from "@/pages/handwriting/subscribe";
 
 /* const Base = lazy(() => import("@/pages/setting/base"));
 const InnerMessage = lazy(() => import("@/pages/setting/base"));
@@ -181,6 +183,40 @@ export const MainRoutes = [
           />
         ),
         title: "debounce",
+        isMenu: true,
+      },
+    ],
+  },
+  {
+    path: "handwriting",
+    title: "手写",
+    icon: <ClockCircleOutlined />,
+    isMenu: true,
+    children: [
+      {
+        path: "handwriting/concurrency",
+        element: (
+          <PrivateRoute
+            element={Concurrency}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "并发控制",
+        isMenu: true,
+      },
+      {
+        path: "handwriting/subscribe",
+        element: (
+          <PrivateRoute
+            element={Subscribe}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "发布-订阅",
         isMenu: true,
       },
     ],
