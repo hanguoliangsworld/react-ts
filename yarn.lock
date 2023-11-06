@@ -11095,6 +11095,11 @@ watchpack@^2.4.0:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
+wave-resampler@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/wave-resampler/-/wave-resampler-1.0.0.tgz#127502338d28e6d5315be1abb06665c04bbb4fc6"
+  integrity sha512-bE3rbpZXuKAV52Cd8/BeJvy82ZqEHK8pPWHrZ9JioaVVTBlmWbDC+u4p9blhFcf0Skepb4hlOAHc25XfqLC48g==
+
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"
   resolved "https://registry.npmmirror.com/wbuf/-/wbuf-1.7.3.tgz#c1d8d149316d3ea852848895cb6a0bfe887b87df"

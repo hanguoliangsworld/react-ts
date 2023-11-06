@@ -18,7 +18,7 @@ module.exports = {
       new SimpleProgressWebpackPlugin(),
       // 打压缩包
       new CompressionWebpackPlugin({
-        filename: "[path].gz[query]", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
+        filename: "[path][base].gz", // 目标资源名称。[file] 会被替换成原资源。[path] 会被替换成原资源路径，[query] 替换成原查询字符串
         algorithm: "gzip", // 算法
         test: new RegExp("\\.(js|css|less)$"), // 压缩 js 与 css
         threshold: 10240, // 只处理比这个值大的资源。按字节计算 10K

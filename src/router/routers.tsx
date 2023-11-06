@@ -13,6 +13,7 @@ import Hooks from "@/pages/v18/hooks";
 import Debounce from "@/pages/v18/debounce";
 import Concurrency from "@/pages/handwriting/concurrency";
 import Subscribe from "@/pages/handwriting/subscribe";
+import Collect from "@/pages/media/collect";
 
 /* const Base = lazy(() => import("@/pages/setting/base"));
 const InnerMessage = lazy(() => import("@/pages/setting/base"));
@@ -217,6 +218,27 @@ export const MainRoutes = [
           />
         ),
         title: "发布-订阅",
+        isMenu: true,
+      },
+    ],
+  },
+  {
+    path: "media",
+    title: "多媒体",
+    icon: <ClockCircleOutlined />,
+    isMenu: true,
+    children: [
+      {
+        path: "media/collect",
+        element: (
+          <PrivateRoute
+            element={Collect}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "采集",
         isMenu: true,
       },
     ],
