@@ -13,7 +13,8 @@ import Hooks from "@/pages/v18/hooks";
 import Debounce from "@/pages/v18/debounce";
 import Concurrency from "@/pages/handwriting/concurrency";
 import Subscribe from "@/pages/handwriting/subscribe";
-import Collect from "@/pages/media/collect";
+import Audio from "@/pages/media/audio";
+import Video from "@/pages/media/video";
 
 /* const Base = lazy(() => import("@/pages/setting/base"));
 const InnerMessage = lazy(() => import("@/pages/setting/base"));
@@ -229,16 +230,29 @@ export const MainRoutes = [
     isMenu: true,
     children: [
       {
-        path: "media/collect",
+        path: "media/audio",
         element: (
           <PrivateRoute
-            element={Collect}
+            element={Audio}
             meta={{
               requiresAuth: true,
             }}
           />
         ),
-        title: "采集",
+        title: "音频",
+        isMenu: true,
+      },
+      {
+        path: "media/video",
+        element: (
+          <PrivateRoute
+            element={Video}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "视频",
         isMenu: true,
       },
     ],

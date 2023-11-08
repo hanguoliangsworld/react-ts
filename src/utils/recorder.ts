@@ -27,39 +27,6 @@ export class Recorder {
   getUserMedia() {
     return new Promise<{ code: status; msg: MediaStream }>(
       (resolve, reject) => {
-        /* let Media = navigator.mediaDevices.getUserMedia;
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-          // 最新标准 API
-          Media = navigator.mediaDevices.getUserMedia;
-        } else if (navigator.webkitGetUserMedia) {
-          // webkit 内核浏览器
-          Media = navigator.webkitGetUserMedia;
-        } else if (navigator.mozGetUserMedia) {
-          // Firefox 浏览器
-          Media = navigator.mozGetUserMedia;
-        } else if (navigator.getUserMedia) {
-          // 旧版 API
-          Media = navigator.getUserMedia;
-        } else {
-          alert("你的浏览器不支持访问用户媒体设备，请进行系统升级");
-        }
-        Media &&
-          Media({
-            audio: true,
-          })
-            .then((mediaStream) => {
-              this.mediaStreams = mediaStream;
-              resolve({
-                code: status.success,
-                msg: mediaStream,
-              });
-            })
-            .catch((err) => {
-              reject({
-                code: status.error,
-                msg: err,
-              });
-            }); */
         window.navigator.mediaDevices
           .getUserMedia({
             audio: true,

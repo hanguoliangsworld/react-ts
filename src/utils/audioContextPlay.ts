@@ -18,7 +18,7 @@ export class Player {
     }
     this.audioContext = new (window.AudioContext ||
       window.webkitAudioContext())();
-    this.bufferSource = this.audioContext.createBufferSource(); // 创建音频源头姐点
+    this.bufferSource = this.audioContext.createBufferSource(); // 创建音频源头节点
     const res = await fetch(audioUrl);
     const arrayBuffer = await res.arrayBuffer(); // byte array字节数组
     const audioBuffer = await this.audioContext.decodeAudioData(
