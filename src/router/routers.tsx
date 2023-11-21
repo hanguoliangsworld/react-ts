@@ -14,6 +14,7 @@ import Debounce from "@/pages/v18/debounce";
 import Concurrency from "@/pages/handwriting/concurrency";
 import Subscribe from "@/pages/handwriting/subscribe";
 import Audio from "@/pages/media/audio";
+import Audio2 from "@/pages/media/audio2";
 import Video from "@/pages/media/video";
 
 /* const Base = lazy(() => import("@/pages/setting/base"));
@@ -240,6 +241,19 @@ export const MainRoutes = [
           />
         ),
         title: "音频",
+        isMenu: true,
+      },
+      {
+        path: "media/audio2",
+        element: (
+          <PrivateRoute
+            element={Audio2}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "音频2",
         isMenu: true,
       },
       {

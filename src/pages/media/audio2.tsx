@@ -1,26 +1,35 @@
 import { useRef, useEffect } from "react";
-import { Recorder } from "@/utils/recorder";
 import { Player } from "@/utils/audioContextPlay";
 
 export default function ContentAudio() {
   const audioRef = useRef<any>(null);
-  const recorderContext = useRef<any>(null);
   const audioUrl = useRef("");
   const PlayerContext = useRef<any>(null);
+  const audioRecorder = useRef<any>(null);
+  const audioChunks = useRef<any>([]);
 
   const start = async () => {
-    let recorder = Recorder.init();
-    recorderContext.current = recorder;
-    //获取麦克风权限
-    let MediaStream = await recorder.getUserMedia();
-    //开始录音
-    recorder.beginRecord(MediaStream.msg);
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
+      .then((stream) => {
+        audioRecorder.current = new MediaRecorder(stream);
+        audioRecorder.current.addEventListener("dataavailable", (e: any) => {
+          audioChunks.current.push(e.data);
+        });
+        audioChunks.current = [];
+        audioRecorder.current.start();
+      })
+      .catch((err) => {
+        // If the user denies permission to record audio, then display an error.
+        console.log("Error: " + err);
+      });
   };
   const end = () => {
-    let url = recorderContext.current.stopRecord();
-    audioUrl.current = url;
+    audioRecorder.current.stop();
   };
   const onPlay = () => {
+    const blobObj = new Blob(audioChunks.current, { type: "audio/webm" });
+    audioUrl.current = URL.createObjectURL(blobObj);
     audioRef.current.src = audioUrl.current;
   };
   const playAudio = () => {

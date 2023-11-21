@@ -9,11 +9,20 @@ export default function ContentAudio() {
   const startRecorder = async () => {
     mediaStreamTrack.current = await navigator.mediaDevices.getUserMedia({
       video: true,
+      // video: { width: 100, height: 100 },
+      audio: true,
     });
     videoRef.current.srcObject = mediaStreamTrack.current;
     videoRef.current.onloadedmetadata = () => videoRef.current.play();
 
-    // 需要更好的浏览器支持
+    // 其他格式
+    // "video/webm",
+    // "audio/webm",
+    // "video/webm;codecs=vp8",
+    // "video/webm;codecs=daala",
+    // "video/webm;codecs=h264",
+    // "audio/webm;codecs=opus",
+    // "video/mpeg",
     const mime = MediaRecorder.isTypeSupported("video/webm; codecs=vp9")
       ? "video/webm; codecs=vp9"
       : "video/webm";

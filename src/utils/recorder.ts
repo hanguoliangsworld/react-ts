@@ -69,7 +69,7 @@ export class Recorder {
 
   //创建jsNode
   createJSNode(audioContext: AudioContext) {
-    const BUFFER_SIZE = 4096;
+    const BUFFER_SIZE = 4096; // 缓冲区大小
     const INPUT_CHANNEL_COUNT = 2;
     const OUTPUT_CHANNEL_COUNT = 2;
     //@ts-ignore

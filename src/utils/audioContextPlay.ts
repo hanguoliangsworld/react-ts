@@ -27,13 +27,13 @@ export class Player {
         return decodeData;
       },
     );
-
     this.bufferSource.buffer = audioBuffer; // 设置数据
     this.bufferSource.loop = true; //设置，循环播放
     this.bufferSource.connect(this.audioContext.destination); // 头尾相连
     // 可以对音频做任何控制
     this.bufferSource.start(0); //立即播放
   }
+
   // 暂停
   async resumeAudio() {
     if (this.audioContext.state === "running") {
