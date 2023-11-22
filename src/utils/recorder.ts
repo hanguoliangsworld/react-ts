@@ -48,37 +48,25 @@ export class Recorder {
     );
   }
 
-  //创建AudioContext，将获取麦克风权限的stream传递给AudioContext
-  //并创建jsNode用来收集信息，将jsNode连接
-  //开始录音，调用该函数，将recorder函数返回的msg传递进去
   beginRecord(mediaStream: MediaStream) {
+    // 1、创建音频模块
     let audioContext = new window.AudioContext();
+    // 2、创建音频接口
     let mediaNode = audioContext.createMediaStreamSource(mediaStream);
     this.mediaNodes = mediaNode;
-    // 创建一个jsNode
-    let jsNode = this.createJSNode(audioContext);
+    // 3、创建音频节点 用于通过js直接处理音频。
+    let jsNode = audioContext.createScriptProcessor(4096, 2, 2); // 缓冲区大小 声道数 声道数
     this.jsNodes = jsNode;
-    // 需要连到扬声器消费掉outputBuffer，process回调才能触发
-    // 并且由于不给outputBuffer设置内容，所以扬声器不会播放出声音
+    // 4、链接扬声器
     jsNode.connect(audioContext.destination);
-    jsNode.onaudioprocess = this.onAudioProcess;
-    // 把mediaNode连接到jsNode
+    // 5、把mediaNode链接到jsNode
     mediaNode.connect(jsNode);
+    // 6、收集数据
+    jsNode.onaudioprocess = this.onAudioProcess;
     this.pcmData = [];
   }
 
-  //创建jsNode
-  createJSNode(audioContext: AudioContext) {
-    const BUFFER_SIZE = 4096; // 缓冲区大小
-    const INPUT_CHANNEL_COUNT = 2;
-    const OUTPUT_CHANNEL_COUNT = 2;
-    //@ts-ignore
-    let creator = audioContext.createScriptProcessor;
-    creator = creator.bind(audioContext);
-    return creator(BUFFER_SIZE, INPUT_CHANNEL_COUNT, OUTPUT_CHANNEL_COUNT);
-  }
-
-  //收集录音信息，大概0.09s调用一次
+  // 收集录音信息，大概0.09s调用一次
   onAudioProcess(event: any) {
     let audioBuffer = event.inputBuffer;
     //左声道

@@ -1,5 +1,8 @@
+// @ts-nocheck
 import { useRef, useEffect } from "react";
 import { Recorder } from "@/utils/recorder";
+import { Recorder2 } from "@/utils/recorder2";
+import { PCMPlayer } from "@/utils/PCMPlayer";
 import { Player } from "@/utils/audioContextPlay";
 
 export default function ContentAudio() {
@@ -9,12 +12,27 @@ export default function ContentAudio() {
   const PlayerContext = useRef<any>(null);
 
   const start = async () => {
-    let recorder = Recorder.init();
+    /* let recorder = Recorder.init();
     recorderContext.current = recorder;
     //获取麦克风权限
     let MediaStream = await recorder.getUserMedia();
-    //开始录音
-    recorder.beginRecord(MediaStream.msg);
+    // 开始录音
+    recorder.beginRecord(MediaStream.msg); */
+
+    // 边录音边播放
+    const players: any = new PCMPlayer({ flushingTime: 10 });
+    window.navigator.mediaDevices
+      .getUserMedia({
+        audio: true,
+      })
+      .then((mediaStream) => {
+        const recorderRef: any = new Recorder2(mediaStream, (buffer: any) => {
+          const newBuffer = new Uint8ClampedArray(buffer);
+          players.feed(newBuffer);
+        });
+        recorderRef.start();
+      })
+      .catch((err) => {});
   };
   const end = () => {
     let url = recorderContext.current.stopRecord();
