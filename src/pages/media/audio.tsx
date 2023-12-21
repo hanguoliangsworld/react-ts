@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Recorder } from "@/utils/recorder";
 import { Recorder2 } from "@/utils/recorder2";
 import { PCMPlayer } from "@/utils/PCMPlayer";
@@ -10,29 +10,37 @@ export default function ContentAudio() {
   const recorderContext = useRef<any>(null);
   const audioUrl = useRef("");
   const PlayerContext = useRef<any>(null);
+  const recorderRef = useRef<any>(null);
 
-  const start = async () => {
-    /* let recorder = Recorder.init();
-    recorderContext.current = recorder;
-    //获取麦克风权限
-    let MediaStream = await recorder.getUserMedia();
-    // 开始录音
-    recorder.beginRecord(MediaStream.msg); */
-
-    // 边录音边播放
+  // 边录音边播放
+  const startRecording = () => {
     const players: any = new PCMPlayer({ flushingTime: 10 });
     window.navigator.mediaDevices
       .getUserMedia({
         audio: true,
       })
       .then((mediaStream) => {
-        const recorderRef: any = new Recorder2(mediaStream, (buffer: any) => {
+        recorderRef.current = new Recorder2(mediaStream, (buffer: any) => {
           const newBuffer = new Uint8ClampedArray(buffer);
           players.feed(newBuffer);
         });
-        recorderRef.start();
+        recorderRef.current.start();
       })
       .catch((err) => {});
+  };
+  const stopRecording = () => {
+    recorderRef.current.stop();
+  };
+
+  // 开始录制
+  const start = async () => {
+    let recorder = Recorder.init();
+    recorderContext.current = recorder;
+    //获取麦克风权限
+    let MediaStream = await recorder.getUserMedia();
+    console.log("MediaStream:", MediaStream.msg);
+    // 开始录音
+    recorder.beginRecord(MediaStream.msg);
   };
   const end = () => {
     let url = recorderContext.current.stopRecord();
@@ -41,6 +49,8 @@ export default function ContentAudio() {
   const onPlay = () => {
     audioRef.current.src = audioUrl.current;
   };
+
+  // 开始播放
   const playAudio = () => {
     PlayerContext.current = Player.init();
     PlayerContext.current.playAudio(audioUrl.current);
@@ -53,11 +63,17 @@ export default function ContentAudio() {
   };
   return (
     <div>
+      <h1>录制</h1>
       <button onClick={start}>开始录制</button>
       <button onClick={end}>停止录制</button>
       <button onClick={onPlay}>播放</button>
       <div>
         <audio ref={audioRef} src="" id="audio" controls autoPlay />
+      </div>
+      <div>
+        <h1>边录音边播放</h1>
+        <button onClick={startRecording}>开始</button>
+        <button onClick={stopRecording}>停止</button>
       </div>
       <div>
         <h1>audioContext</h1>

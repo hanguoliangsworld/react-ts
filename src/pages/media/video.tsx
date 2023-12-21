@@ -9,7 +9,7 @@ export default function ContentAudio() {
   const startRecorder = async () => {
     mediaStreamTrack.current = await navigator.mediaDevices.getUserMedia({
       video: true,
-      // video: { width: 100, height: 100 },
+      // video: { width: 600, height: 300 },
       audio: true,
     });
     videoRef.current.srcObject = mediaStreamTrack.current;
@@ -46,10 +46,10 @@ export default function ContentAudio() {
       videoRef.current.onloadedmetadata = () => videoRef.current.play();
 
       // 下载至本地
-      let a = document.createElement("a");
+      /* let a = document.createElement("a");
       a.href = url;
       a.download = "video.mp4";
-      a.click();
+      a.click(); */
     }); // 必须手动启动
     mediaRecorder.current.start();
   };
@@ -80,13 +80,7 @@ export default function ContentAudio() {
   return (
     <div>
       <div id="contentHolder">
-        <video
-          id="video"
-          width="600px"
-          height="300px"
-          ref={videoRef}
-          controls
-        />
+        <video id="video" width="600" height="300" ref={videoRef} controls />
       </div>
       <button onClick={startRecorder}>开始录屏</button>
       <button onClick={stopRecorder}>停止录屏</button>

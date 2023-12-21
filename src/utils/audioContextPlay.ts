@@ -33,15 +33,9 @@ export class Player {
     // 4、播放
     this.bufferSource.buffer = audioBuffer; // 设置数据
     this.bufferSource.loop = true; //设置，循环播放
-    // this.bufferSource.playbackRate = 2; // 速度
     this.bufferSource.connect(this.audioContext.destination); // 头尾相连
     // 可以对音频做任何控制
     this.bufferSource.start(0); //立即播放
-
-    // 设置音量
-    /* const gainNode = this.audioContext.createGain();
-    gainNode.gain.value = 3;
-    gainNode.connect(this.audioContext.destination); */
   }
 
   // 暂停

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Player } from "@/utils/audioContextPlay";
 
 export default function ContentAudio() {
@@ -20,7 +20,6 @@ export default function ContentAudio() {
         audioRecorder.current.start();
       })
       .catch((err) => {
-        // If the user denies permission to record audio, then display an error.
         console.log("Error: " + err);
       });
   };
