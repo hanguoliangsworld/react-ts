@@ -8,8 +8,8 @@ export default function ContentAudio() {
   // 开始录屏
   const startRecorder = async () => {
     mediaStreamTrack.current = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      // video: { width: 600, height: 300 },
+      //video: true,
+      video: { width: 600, height: 300 },
       audio: true,
     });
     videoRef.current.srcObject = mediaStreamTrack.current;

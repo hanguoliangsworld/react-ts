@@ -11,10 +11,11 @@ export default function ContentAudio() {
   const audioUrl = useRef("");
   const PlayerContext = useRef<any>(null);
   const recorderRef = useRef<any>(null);
+  const mediaNode = useRef<any>(null);
 
   // 边录音边播放
   const startRecording = () => {
-    const players: any = new PCMPlayer({ flushingTime: 10 });
+    /*  const players: any = new PCMPlayer({ flushingTime: 10 });
     window.navigator.mediaDevices
       .getUserMedia({
         audio: true,
@@ -26,10 +27,25 @@ export default function ContentAudio() {
         });
         recorderRef.current.start();
       })
-      .catch((err) => {});
+      .catch((err) => {}); */
+    window.navigator.mediaDevices
+      .getUserMedia({
+        audio: true,
+      })
+      .then((mediaStream) => {
+        console.log(mediaStream);
+        let audioContext = new (window.AudioContext ||
+          window.webkitAudioContext)();
+        mediaNode.current = audioContext.createMediaStreamSource(mediaStream);
+        // 这里connect之后就会自动播放了
+        mediaNode.current.connect(audioContext.destination);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   const stopRecording = () => {
-    recorderRef.current.stop();
+    mediaNode.current.disconnect();
   };
 
   // 开始录制

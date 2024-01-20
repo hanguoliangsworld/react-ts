@@ -7,13 +7,12 @@ const WebWorker = () => {
   useEffect(() => {
     const worker = new Worker(webWorker);
     console.log("——主线程执行——");
+    worker.postMessage(new Array(30000).fill(1));
     worker.onmessage = (e) => {
       // 接收消息
       console.log("——web worker线程执行完毕——");
       setList1(e.data);
     };
-
-    worker.postMessage(new Array(30000).fill(1));
 
     console.log("——主线程执行2——");
     const arr: string[] = [];

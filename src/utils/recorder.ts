@@ -1,6 +1,4 @@
 // @ts-nocheck
-
-import { PCMPlayer } from "@/utils/PCMPlayer";
 enum status {
   success = 200,
   error = 500,
@@ -8,7 +6,6 @@ enum status {
 
 let leftDataList: any[] = [];
 let rightDataList: any[] = [];
-let players: any = null;
 
 //录音
 export class Recorder {
@@ -16,7 +13,6 @@ export class Recorder {
   public mediaStreams: MediaStream | undefined;
   public jsNodes: ScriptProcessorNode | undefined;
   public mediaNodes: MediaStreamAudioSourceNode | undefined;
-  public pcmData: [];
 
   //初始化，单例模式
   static init(): Recorder {
@@ -73,33 +69,7 @@ export class Recorder {
       let rightChannelData = audioBuffer.getChannelData(1);
       leftDataList.push([...leftChannelData]);
       rightDataList.push([...rightChannelData]);
-      this.playPcm();
     };
-    this.pcmData = [];
-
-    players = new PCMPlayer({ flushingTime: 10, channels: 2 });
-  }
-
-  playPcm() {
-    //合并左右声道
-    let leftData = this.mergeArray(leftDataList),
-      rightData = this.mergeArray(rightDataList);
-    //交叉合并左右声道
-    let allData = this.interleaveLeftAndRight(leftData, rightData);
-    const float32Array = new Float32Array(allData);
-    players.feed(float32Array.buffer);
-  }
-
-  // 收集录音信息，大概0.09s调用一次
-  onAudioProcess(event: any) {
-    let audioBuffer = event.inputBuffer;
-    //左声道
-    let leftChannelData = audioBuffer.getChannelData(0);
-    //右声道
-    let rightChannelData = audioBuffer.getChannelData(1);
-    leftDataList.push([...leftChannelData]);
-    rightDataList.push([...rightChannelData]);
-    this.playPcm();
   }
 
   //停止录音
@@ -114,11 +84,10 @@ export class Recorder {
     //交叉合并左右声道
     let allData = this.interleaveLeftAndRight(leftData, rightData);
     let wavBuffer = this.createWavFile(allData);
-    this.pcmData = allData;
     return this.playRecord(wavBuffer);
   }
 
-  //返回src
+  // 生成文件
   playRecord(arrayBuffer: ArrayBuffer) {
     let blob = new Blob([new Uint8Array(arrayBuffer)]);
     let blobUrl = URL.createObjectURL(blob);
