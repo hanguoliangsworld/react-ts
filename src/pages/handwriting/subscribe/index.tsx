@@ -44,7 +44,7 @@ const Subscrible = () => {
     return a + b;
   }; */
 
-  function currying(...a) {
+  /* function currying(...a) {
     let p = [...a];
     function newFun(...b) {
       const bs = [...b];
@@ -59,7 +59,22 @@ const Subscrible = () => {
       }
     }
     return newFun;
-  }
+  } */
+  const currying = (...args) => {
+    let argsArr = [...args];
+    const fun = (...innerArgs) => {
+      const innerArgsArr = [...innerArgs];
+      if (innerArgsArr && innerArgsArr.length > 0) {
+        argsArr = argsArr.concat(innerArgsArr);
+        return fun;
+      } else {
+        return argsArr.reduce((prv, item) => {
+          return prv + item;
+        });
+      }
+    };
+    return fun;
+  };
   const currys = () => {
     console.log(currying(2, 8)(2, 6)()); // 6
   };

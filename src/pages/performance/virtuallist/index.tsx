@@ -3,9 +3,9 @@ import { flushSync } from "react-dom";
 
 const itemHeight = 30; // 列表项高度
 const containerHeight = 600; // 容器高度
-const total = 1000; // 数据总条数
-const contentHeight = total * (itemHeight + 1); // 总内容高度
-const paddingCount = 5; // 误差
+const total = 100000; // 数据总条数
+// const contentHeight = total * (itemHeight + 1); // 总内容高度
+const paddingCount = 2; // 误差
 const Virtuallist = () => {
   const [scrollTop, setScrollTop] = useState(0); // 滚动位置
 
@@ -19,7 +19,6 @@ const Virtuallist = () => {
   startIdx = Math.max(startIdx - paddingCount, 0); // 处理越界情况
   endIdx = Math.min(endIdx + paddingCount, total - 1);
 
-  console.log(startIdx, endIdx, 1111122);
   const innerBeforeHeight = useMemo(() => itemHeight * startIdx, [startIdx]);
 
   const items = [];
