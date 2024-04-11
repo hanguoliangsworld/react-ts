@@ -13,6 +13,7 @@ import Hooks from "@/pages/v18/hooks";
 import Debounce from "@/pages/v18/debounce";
 import Concurrency from "@/pages/handwriting/concurrency";
 import Subscribe from "@/pages/handwriting/subscribe";
+import PromiseElement from "@/pages/handwriting/promise";
 import Audio from "@/pages/media/audio";
 import Audio2 from "@/pages/media/audio2";
 import Video from "@/pages/media/video";
@@ -220,6 +221,19 @@ export const MainRoutes = [
           />
         ),
         title: "发布-订阅",
+        isMenu: true,
+      },
+      {
+        path: "handwriting/promise",
+        element: (
+          <PrivateRoute
+            element={PromiseElement}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "promise",
         isMenu: true,
       },
     ],
