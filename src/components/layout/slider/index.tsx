@@ -6,6 +6,7 @@ import { HomeMainState, RouterProps } from "@/config/interface";
 import { CONFIG } from "@/config";
 import { MainRoutes } from "@/router/routers";
 import logoImage from "@/assets/images/logo.png";
+import useStore from "@/store";
 import "./index.less";
 
 const { Sider } = Layout;
@@ -17,6 +18,8 @@ const Sidebar: React.FC<Props> = ({ collapsed }) => {
   const navigate = useNavigate();
   const [selectedKeys, setSelectedKeys] = useState("");
   const [openKeys, setOpenKeys] = useState<string[]>([""]);
+
+  const name = useStore((state: any) => state.name);
 
   function handleOpenChange(openKeys: any) {
     setOpenKeys(openKeys);
@@ -99,7 +102,7 @@ const Sidebar: React.FC<Props> = ({ collapsed }) => {
       width={190}
       className="sidebar">
       <div className="sider-menu-logo">
-        {collapsed ? <img src={logoImage} alt="" /> : CONFIG.title}
+        {collapsed ? <img src={logoImage} alt="" /> : name}
       </div>
 
       <Menu

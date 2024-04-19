@@ -7,7 +7,7 @@ const Virtuallist = () => {
   return (
     <div>
       {/* 渲染时间 */}
-      {/* <DemoList /> */}
+      <DemoList />
 
       {/* 时间分片 */}
       {/* <DemoSplit /> */}
@@ -16,7 +16,7 @@ const Virtuallist = () => {
       {/* <DemoVirlist /> */}
 
       {/* 虚拟列表-高度未知 */}
-      <DemoDynamic />
+      {/* <DemoDynamic /> */}
     </div>
   );
 };

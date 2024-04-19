@@ -17,7 +17,7 @@ const Page = () => {
   };
   return (
     <div style={{ overflow: "auto", height: "600px", border: "1px solid red" }}>
-      <button onClick={getList}>请求10万条数据</button>
+      <button onClick={getList}>请求5万条数据</button>
       {list.map((item, index) => (
         <div key={index}>{"item" + index}</div>
       ))}

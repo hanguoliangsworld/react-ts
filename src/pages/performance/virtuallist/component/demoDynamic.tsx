@@ -27,8 +27,8 @@ const DemoDynamic = () => {
   }, []);
 
   const updateCache = () => {
-    //更新缓存高度
-    //获取已更新的节点，并获取其高度并将其相加到总高度中
+    // 更新缓存高度
+    // 获取已更新的节点，并获取其高度并将其相加到总高度中
     const nodes: NodeListOf<any> = List.current?.childNodes || ([] as any);
     nodes.forEach((node: HTMLDivElement) => {
       if (!node) {

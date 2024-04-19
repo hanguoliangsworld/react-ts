@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import * as echarts from "echarts";
+import useStore from "@/store";
 import "./index.less";
 
 const options = {
@@ -67,18 +68,13 @@ const Home = (props: any) => {
   console.log("useParams", param);
 
   const [size, setSize] = useState("12");
-  useEffect(() => {
-    setSize("30px");
-  }, []);
-  const getCss = () => {
-    const ele: any = document.getElementById("about");
-    var theCSSprop = window
-      .getComputedStyle(ele, null)
-      .getPropertyValue("font-size");
-    console.log(theCSSprop);
-  };
+
+  const changeName = useStore((state: any) => state.changeName);
+  const name = useStore((state: any) => state.name);
 
   useEffect(() => {
+    setSize("30px");
+
     // 创建一个echarts实例，返回echarts实例。不能在单个容器中创建多个echarts实例
     const chart = echarts.init(chartRef.current);
     // 设置图表实例的配置项和数据
@@ -89,6 +85,19 @@ const Home = (props: any) => {
       chart.dispose();
     };
   }, []);
+
+  const getCss = () => {
+    const ele: any = document.getElementById("about");
+    var theCSSprop = window
+      .getComputedStyle(ele, null)
+      .getPropertyValue("font-size");
+    console.log(theCSSprop);
+  };
+
+  const changeProjectName = () => {
+    changeName("去巡山");
+    console.log(name);
+  };
   return (
     <div>
       <div
@@ -97,9 +106,12 @@ const Home = (props: any) => {
         style={{ fontSize: size, transition: "all 10s" }}>
         about
         <button onClick={getCss} className="box-button">
-          获取
+          获取字体大小
         </button>
       </div>
+      <button onClick={changeProjectName} style={{ marginTop: "30px" }}>
+        zustand 修改项目名称
+      </button>
       <div style={{ width: "600px", height: "400px" }} ref={chartRef} />
     </div>
   );
