@@ -14,7 +14,7 @@ const datas = new Array(total).fill(1).map((item, index) => {
   };
 });
 
-let cacheContentHeight = [] as Array<number>;
+let cacheContentHeight = [] as Array<number>; // 渲染元素高度集合
 
 const DemoDynamic = () => {
   const [startIdx, setStartIdx] = useState(0);

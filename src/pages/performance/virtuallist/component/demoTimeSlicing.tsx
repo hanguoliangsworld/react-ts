@@ -13,6 +13,7 @@ export default class App extends React.Component {
   sliceTime = (list: any, start: number) => {
     let size = list.length;
     if (start >= size) return;
+
     setTimeout(() => {
       const newList = list.slice(start, start + num);
       start += num;
