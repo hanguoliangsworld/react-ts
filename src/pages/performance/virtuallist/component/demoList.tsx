@@ -7,7 +7,7 @@ const Page = () => {
     // 记录任务开始时间
     let now = Date.now();
 
-    const arr: any = new Array(100000).fill(0);
+    const arr: any = new Array(50000).fill(0);
     setList(arr);
 
     console.log("JS运行时间：", Date.now() - now);

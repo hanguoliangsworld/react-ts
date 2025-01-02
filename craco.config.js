@@ -4,6 +4,7 @@ const SimpleProgressWebpackPlugin = require("simple-progress-webpack-plugin");
 const ImageminWebpWebpackPlugin = require("imagemin-webp-webpack-plugin");
 const CracoLessPlugin = require("craco-less");
 const path = require("path");
+const webpack = require("webpack");
 // 是否是生产环境
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -38,6 +39,10 @@ module.exports = {
         detailedLogs: false,
         silent: false,
         strict: true,
+      }),
+      new webpack.ProvidePlugin({
+        process: "process/browser",
+        Buffer: ["buffer", "Buffer"],
       }),
       // 压缩ES6
       /* new UglifyJsPlugin({
@@ -91,5 +96,9 @@ module.exports = {
         pathRewrite: { "^/api": "" },
       },
     },
+    /* headers: {
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "require-corp",
+    }, */
   },
 };

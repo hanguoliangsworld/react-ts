@@ -14,23 +14,23 @@ export default class App extends React.Component {
     let size = list.length;
     if (start >= size) return;
 
-    setTimeout(() => {
+    /* setTimeout(() => {
       const newList = list.slice(start, start + num);
       start += num;
       this.setState({
         list: this.state.list.concat(newList),
       });
       this.sliceTime(list, start);
-    }, 0);
+    }, 0); */
 
-    /* window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
       const newList = list.slice(start, start + num);
       start += num;
       this.setState({
         list: this.state.list.concat(newList),
       });
       this.sliceTime(list, start);
-    }); */
+    });
   };
 
   render() {

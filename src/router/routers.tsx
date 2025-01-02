@@ -17,6 +17,8 @@ import PromiseElement from "@/pages/handwriting/promise";
 import Audio from "@/pages/media/audio";
 import Audio2 from "@/pages/media/audio2";
 import Video from "@/pages/media/video";
+import ZustandElement from "@/pages/handwriting/zustand";
+import FfmpegElement from "@/pages/media/ffmpeg";
 
 /* const Base = lazy(() => import("@/pages/setting/base"));
 const InnerMessage = lazy(() => import("@/pages/setting/base"));
@@ -236,6 +238,19 @@ export const MainRoutes = [
         title: "promise",
         isMenu: true,
       },
+      {
+        path: "handwriting/zustand",
+        element: (
+          <PrivateRoute
+            element={ZustandElement}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "zustand",
+        isMenu: true,
+      },
     ],
   },
   {
@@ -281,6 +296,19 @@ export const MainRoutes = [
           />
         ),
         title: "视频",
+        isMenu: true,
+      },
+      {
+        path: "media/ffmpeg",
+        element: (
+          <PrivateRoute
+            element={FfmpegElement}
+            meta={{
+              requiresAuth: true,
+            }}
+          />
+        ),
+        title: "ffmpeg",
         isMenu: true,
       },
     ],
